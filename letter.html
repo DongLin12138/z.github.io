@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>给贝贝的道歉信</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            background-color: #e7e9d1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .letter {
+            font-size: 15px;
+            margin-top: 30px;
+            line-height: 1.5;
+            text-indent: 2em;
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 50px;
+            font-size: 18px;
+        }
+
+        .signature strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><span id="title"></span></h1>
+        <p class="letter" id="letter"></p>
+        <div class="signature">
+            <p><strong><span id="signature"></span></strong></p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            var title = document.getElementById("title");
+            var letter = document.getElementById("letter");
+            var signature = document.getElementById("signature");
+            var titleContent = "  一封道歉信";
+            var content = "        对不起，贝贝！因为之前家里发生了很大的变故，整个半年的生活几乎都笼罩在一层阴影中。开始变得消沉，每天不和家人说话，只存在于一个人的世界。对你也有点畏惧，不想直面外人，之后又感到很愧疚，说到的也没有做到，给你产生了不好的影响，可能也没办法原谅我，但是对你还是感到十分抱歉，对不起！这封信也不会很长，因为也不想浪费你多余的时间。\n愿你收获欢乐和温馨，带着美好的回忆迎接新的挑战！再见！";
+            var signatureContent = "董琳";
+            var index = 0;
+            var interval = setInterval(function () {
+                if (index < titleContent.length) {
+                    title.innerHTML += titleContent.charAt(index);
+                    index++;
+                } else if (index === titleContent.length) {
+                    index++;
+                    title.innerHTML += "<span id='title-separator'></span>";
+                } else if (index <= titleContent.length + content.length + 1) {
+                    if (index === titleContent.length + 1) {
+                        letter.innerHTML += "<br>";
+                    }
+                    var contentIndex = index - titleContent.length - 2;
+                    letter.innerHTML += content.charAt(contentIndex);
+                    index++;
+                } else if (index === titleContent.length + content.length + 2) {
+                    index++;
+                    signature.innerHTML += "<span id='signature-separator'></span>";
+                } else if (index <= titleContent.length + content.length + signatureContent.length + 3) {
+                    var signatureIndex = index - titleContent.length - content.length - 3;
+                    signature.innerHTML += signatureContent.charAt(signatureIndex);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 200);
+        });
+    </script>
+</body>
+
+</html>
